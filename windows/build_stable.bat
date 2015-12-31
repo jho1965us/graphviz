@@ -15,6 +15,8 @@ set wgetPath=C:\wget\bin
 set SevenzPath="C:\Program Files\7-Zip"
 set pscpPath="C:\Program Files\PuTTY"
 set sdkPath="C:\Program Files\Microsoft SDKs\Windows\v7.0\Bin"
+set VERSION_AnyPatch=2.38.*
+set VERSION=2.38.0
 PATH=%PATH%;%VS2008DIR%;%wgetPath%;%SevenzPath%;%pscpPath%;%sdkPath%;
 
 REM *****************************************************
@@ -35,7 +37,7 @@ REM *****************************************************
 wget -O %buildBaseDir%source.tar.gz %sourceUrl%
 7z x -y %buildBaseDir%source.tar.gz
 7z x -y %buildBaseDir%source.tar
-move /Y %buildBaseDir%graphviz-2.30* graphviz2
+move /Y %buildBaseDir%graphviz-%VERSION_AnyPatch% graphviz2
 REM **************End of source download*****************
 
 
@@ -95,11 +97,11 @@ del %setupProjectDir%Release\%setupProjectName%.msi
 del %setupProjectDir%Release\*.msi
 devenv %setupProjectFile% -Clean release -Out %buildDir%packagingLog.txt
 devenv %setupProjectFile% -Build release -Out %buildDir%packagingLog.txt
-COPY /Y %setupProjectDir%Release\%setupProjectName%.msi %buildBaseDir%graphviz-2.30.1.msi
-msitran -a c:\graphviz-ms\addtopath.mst %buildBaseDir%graphviz-2.30.1.msi
+COPY /Y %setupProjectDir%Release\%setupProjectName%.msi %buildBaseDir%graphviz-%VERSION%.msi
+msitran -a c:\graphviz-ms\addtopath.mst %buildBaseDir%graphviz-%VERSION%.msi
 pscp -q *.msi graphviz-web://data/pub/graphviz/stable/windows > pscpLog.txt 2>&1
 
 7z a -tzip c:\graphviz-ms\graphviz.zip c:\graphviz-ms\release
-move /Y c:\graphviz-ms\graphviz.zip %buildBaseDir%graphviz-2.30.1.zip
+move /Y c:\graphviz-ms\graphviz.zip %buildBaseDir%graphviz-%VERSION%.zip
 pscp -q *.zip graphviz-web://data/pub/graphviz/stable/windows >> pscpLog.txt 2>&1
 

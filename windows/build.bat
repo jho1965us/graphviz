@@ -15,12 +15,12 @@ set wgetPath=C:\wget\bin
 set SevenzPath="C:\Program Files\7-Zip"
 set pscpPath="C:\Program Files\PuTTY"
 set sdkPath="C:\Program Files\Microsoft SDKs\Windows\v7.0\Bin"
-set VERSION="2.37"
+set VERSION="2.39"
 PATH=%PATH%;%VS2008DIR%;%wgetPath%;%SevenzPath%;%pscpPath%;%sdkPath%;
 
 REM *****************************************************
 REM 84716ny
-REM clean up code , if you rpvode source manually comment out this section
+REM clean up code , if you provide source manually comment out this section
 REM *****************************************************
 rmdir /S /Q %buildDir%
 rmdir /S /Q %targetDir%
